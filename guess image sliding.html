@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>guess image</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        body{
+            width: 100vw;
+            overflow-x: hidden;
+        }
+        .nav1{
+            width: 100%; 
+            height: 40px; 
+            background-color: black; 
+            color:white;
+            text-align: center;
+        }
+        .nav2{
+            width: 100%; 
+            height: 60px;
+            background-color: white; 
+            font-size: 20PX;
+            margin-left: 100px;
+            }
+        section{
+            width: 100%;
+            height: calc(100vh - 100px);
+
+        }
+        .inBox{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        .imgBox{
+            width: 800%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s linear;
+           
+        }
+        
+        .imgBox img{
+            width: calc(100%/ 8);
+            height: 100%;
+            background-position: left top;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .inBox button{
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            border: none;
+            position: absolute;
+            z-index: 50;
+            font-size: 80px;
+            font-weight: 100;
+        }
+        .leftarrow{
+            left: 50px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            /* background-color: transparent;
+            position: absolute;
+            font-size: 80px;
+            font-weight: 100;
+            cursor: pointer;
+            border: none;
+            top: 50%;
+            transform: translateY(-50%);
+            color: black;
+            margin-left: 50px; */
+        }
+        .rightarrow{
+            right: 50px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            /* background-color: transparent;
+            position: absolute;
+            font-size: 80px;
+            font-weight: 100;
+            cursor: pointer;
+            border: none;
+            top: 50%;
+            transform: translateY(-50%);
+            color: black;
+            right: 50px;
+            margin-right: 10px; */
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav1">CLEARANCE SALE 올여름 마지막, 최대 50% 할인!></nav>
+    <nav class="nav2">여성  남성  컬렉션  데님 </nav>
+    <section>
+        <div class="inBox">
+            <div class="imgBox" ontransitionend ="fixloop()">
+                <img src="./img/guess6.jpg" alt="img6"/>
+                <img src="./img/guess1.jpg" alt="img1"/>
+                <img src="./img/guess2.jpg" alt="img2"/>
+                <img src="./img/guess3.jpg" alt="img3"/>
+                <img src="./img/guess4.jpg" alt="img4"/>
+                <img src="./img/guess5.jpg" alt="img5"/>
+                <img src="./img/guess6.jpg" alt="img6"/>
+                <img src="./img/guess1.jpg" alt="img1"/>
+            </div>
+                <button class="leftarrow" onclick="prevImg()">＜</button>
+                <button class="rightarrow" onclick="nextImg()">＞</button>
+        </div>
+    </section>
+    <script>
+        let imgBox = document.querySelector(".imgBox");
+        let index = 1;
+        let total = document.querySelectorAll(".imgBox img").length;
+        let step = 100 / total
+
+        function mi(){
+             imgBox.style.transform = `translateX(${-step*index}%)`
+        }
+        function nextImg(){
+            index ++
+            mi();
+        }
+
+        function prevImg(){
+            index --
+            mi();
+        }
+        function fixloop(){
+            if(index === total -1 ){
+                imgBox.style.transition = "none"
+                index = 1
+                mi();
+                void imgBox.offsetWidth;
+                imgBox.style.transition = "0.5s"
+            }else if(index === 0){
+                imgBox.style.transition = "none"
+                index = total -2
+                mi();
+                void imgBox.offsetWidth;
+                imgBox.style.transition = "0.5s"
+            }
+        }
+    </script>
+</body>
+</html>
